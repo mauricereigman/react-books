@@ -12,6 +12,6 @@ export class BooksService {
     }
 
     private static toAppModel(googleBook: GoogleBook): Book {
-        return new Book(googleBook.id, googleBook.volumeInfo.title, googleBook.volumeInfo.publishedDate, googleBook.volumeInfo.authors)
+        return new Book(googleBook.id, googleBook.volumeInfo.title, googleBook.volumeInfo.publishedDate, googleBook.volumeInfo.imageLinks.thumbnail, googleBook.volumeInfo.authors)
     }
 }
