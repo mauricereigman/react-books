@@ -1,4 +1,10 @@
 .BooksSearch {
-  height: 400px;
+  height: 650px;
   width: 100%;
+
+  .spinner {
+    height: 30px;
+    width: 80px;
+    display: inline-block;
+  }
 }

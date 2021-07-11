@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import styles from './BooksSearch.module.scss';
 import {BooksService} from "../../services/Book.service";
 import {DataGrid} from "@material-ui/data-grid";
 import {BookSearchState} from "./BookSearch";
 import {Book} from "../../models/Book";
 import {BookRow} from "./BookRow";
+import {CircularProgress, debounce, TextField} from "@material-ui/core";
 
 const BooksSearch = () => {
 
@@ -62,11 +63,28 @@ const BooksSearch = () => {
         }))
     }
 
+    const debouncedLoadBooksBy = useCallback(
+        debounce((searchQuery: string) => loadBooksBy(searchQuery), 1000),
+        []
+    )
+
+    const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        debouncedLoadBooksBy(event.target.value)
+    }
+
     if (state.books.isLoaded || state.books.isLoading) {/*do nothing*/
     } else loadBooksBy("harry potter");
 
     return (
         <div className={styles.BooksSearch} data-testid="BooksSearch">
+            <TextField
+                id="Search"
+                label="Search"
+                placeholder={"type a query and press enter"}
+                onChange={handleSearchInput}/>
+            <span className={styles.spinner}>
+                {  state.books.isLoading ? (<CircularProgress />) : null}
+            </span>
             <DataGrid
                 rows={state.table.rows}
                 columns={state.table.columns}
