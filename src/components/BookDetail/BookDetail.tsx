@@ -18,7 +18,7 @@ const BookDetail = () => {
             <h2>
                 {book?.title}
             </h2>
-            <img src={book?.thumbNail} alt={"book cover image"}/>
+            <img src={book?.thumbnail} alt={"book cover"}/>
         </div>
     );
 }

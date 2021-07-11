@@ -1,7 +1,6 @@
 import {Book} from "../models/Book";
 import {GoogleBook} from "./GoogleBook";
 import {validateOrReject} from "class-validator";
-import {Simulate} from "react-dom/test-utils";
 
 
 export class BooksService {
@@ -30,7 +29,14 @@ export class BooksService {
     }
 
     private static toAppModel(googleBook: GoogleBook): Book {
-        return new Book(googleBook.id, googleBook.volumeInfo.title, googleBook.volumeInfo.publishedDate, googleBook.volumeInfo.imageLinks.thumbnail, googleBook.volumeInfo.authors)
+        return {
+            id: googleBook.id,
+            title: googleBook.volumeInfo.title,
+            publishedDate: googleBook.volumeInfo.publishedDate,
+            thumbnail: googleBook.volumeInfo.imageLinks.thumbnail,
+            authors: googleBook.volumeInfo.authors
+        }
+
     }
 
     public getBooks(searchQuery: string): Promise<Book[]> {
