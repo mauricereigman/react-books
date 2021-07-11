@@ -8,6 +8,7 @@ import {useHistory} from 'react-router-dom';
 import {findBooksBy, selectFoundBooks} from "../../state/books/Slice";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {BookStatus} from "../../state/books/State.interface";
+import Title from "../Title/Title.lazy";
 
 const BooksSearch = () => {
 
@@ -49,6 +50,7 @@ const BooksSearch = () => {
 
     return (
         <div className={styles.BooksSearch} data-testid="BooksSearch">
+            <Title title={"Search"} subTitle={"Find some books"}/>
             <TextField
                 id="Search"
                 label="Search"

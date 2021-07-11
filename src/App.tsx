@@ -8,7 +8,6 @@ import BookDetail from "./components/BookDetail/BookDetail.lazy";
 function App() {
   return (
       <div>
-          <h1>Search for books</h1>
           <div>
               <Switch>
                   <Route path="/search">
