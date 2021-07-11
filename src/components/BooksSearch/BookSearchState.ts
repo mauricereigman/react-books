@@ -1,12 +1,11 @@
 import {GridColumns} from "@material-ui/data-grid";
 import {Book} from "../../models/Book";
 import {BookRow} from "./BookRow";
+import {AsyncObjectStatus} from "../../util/AsyncObjectStatus";
 
 export type BookSearchState = {
     books: {
-        error: any,
-        isLoaded: boolean,
-        isLoading: boolean,
+        status: AsyncObjectStatus
         books: Book[],
     }
     table: {

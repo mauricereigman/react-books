@@ -1,19 +1,21 @@
 import React, {useCallback, useState} from 'react';
 import styles from './BooksSearch.module.scss';
 import {BooksService} from "../../services/Book.service";
-import {DataGrid} from "@material-ui/data-grid";
-import {BookSearchState} from "./BookSearch";
+import {DataGrid, GridRowParams} from "@material-ui/data-grid";
+import {BookSearchState} from "./BookSearchState";
 import {Book} from "../../models/Book";
 import {BookRow} from "./BookRow";
 import {CircularProgress, debounce, TextField} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
+import {AsyncObjectStatus} from "../../util/AsyncObjectStatus";
 
 const BooksSearch = () => {
 
-    const initialState = {
+    const history = useHistory()
+
+    const initialState: BookSearchState = {
         books: {
-            error: null,
-            isLoaded: false,
-            isLoading: false,
+            status: AsyncObjectStatus.Idle,
             books: []
         },
         table: {
@@ -34,22 +36,20 @@ const BooksSearch = () => {
         if (!searchQuery) return
 
         const newState = {...state}
-        newState.books.isLoading = true
+        newState.books.status = AsyncObjectStatus.Loading
         setState(newState)
         bookService.getBooks(searchQuery)
             .then(books => {
-                console.log("tableRowsFrom(books)",tableRowsFrom(books))
+                console.log("tableRowsFrom(books)", tableRowsFrom(books))
                 const newState = {...state}
-                newState.books.isLoaded = true
+                newState.books.status = AsyncObjectStatus.Loaded
                 newState.books.books = books
                 newState.table.rows = tableRowsFrom(books)
-                newState.books.isLoading = false
                 setState(newState)
             })
             .catch(error => {
                 const newState = {...state}
-                newState.books.isLoading = false
-                newState.books.error = error
+                newState.books.status = AsyncObjectStatus.Error
                 setState(newState)
             })
     }
@@ -72,8 +72,9 @@ const BooksSearch = () => {
         debouncedLoadBooksBy(event.target.value)
     }
 
-    if (state.books.isLoaded || state.books.isLoading) {/*do nothing*/
-    } else loadBooksBy("harry potter");
+    const handleRowClick = (params: GridRowParams, event: React.MouseEvent): void => {
+        history.push(`/detail/${params.id}`)
+    }
 
     return (
         <div className={styles.BooksSearch} data-testid="BooksSearch">
@@ -83,11 +84,12 @@ const BooksSearch = () => {
                 placeholder={"type a query and press enter"}
                 onChange={handleSearchInput}/>
             <span className={styles.spinner}>
-                {  state.books.isLoading ? (<CircularProgress />) : null}
+                {state.books.status === AsyncObjectStatus.Loading ? (<CircularProgress/>) : null}
             </span>
             <DataGrid
                 rows={state.table.rows}
                 columns={state.table.columns}
+                onRowClick={handleRowClick}
             />
         </div>
     );

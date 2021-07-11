@@ -11,7 +11,15 @@ export class BooksService {
             .then(googleBooks => googleBooks.map(BooksService.toAppModel))
     }
 
+    public getBook(id: string): Promise<Book> {
+        console.log("getbook")
+        return fetch(`${BooksService.googleBooksApi}/volumes/${id}`)
+            .then(res => res.json())
+            .then(json => json as GoogleBook)
+            .then(BooksService.toAppModel)
+    }
+
     private static toAppModel(googleBook: GoogleBook): Book {
-        return new Book(googleBook.id, googleBook.volumeInfo.title, googleBook.volumeInfo.publishedDate, googleBook.volumeInfo.authors)
+        return new Book(googleBook.id, googleBook.volumeInfo.title, googleBook.volumeInfo.publishedDate, googleBook.volumeInfo.imageLinks.thumbnail, googleBook.volumeInfo.authors)
     }
 }
