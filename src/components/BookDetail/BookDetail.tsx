@@ -39,7 +39,7 @@ const BookDetail = () => {
             return (<CircularProgress/>)
         case AsyncObjectStatus.Loaded:
             return (<div data-testid="BookDetail">
-               <Title title={"Book details"}/>
+                <Title title={"Book details"}/>
                 <h3>{state.book?.title}</h3>
                 <img src={state.book?.thumbNail} alt={"book cover image"}/>
             </div>)
