@@ -1,25 +1,25 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {BooksService} from "../../services/Book.service";
 import {BookDetailState} from "./BookDetailState";
 import {AsyncObjectStatus} from "../../util/AsyncObjectStatus";
 import {CircularProgress} from "@material-ui/core";
 import Title from "../Title/Title.lazy";
+import {BookDetailProps} from "./BookDetailProps";
 
-const BookDetail = () => {
+const BookDetail: FC<BookDetailProps> = (props) => {
     const initialState: BookDetailState = {
         status: AsyncObjectStatus.Idle,
         book: undefined
     }
     const [state, setState] = useState<BookDetailState>(initialState)
-    const bookService = new BooksService()
 
     const loadBookBy = (id: string): void => {
         const newState = {...state}
 
         newState.status = AsyncObjectStatus.Loading
         setState(newState);
-        bookService.getBook(id)
+        props.bookService.getBook(id)
             .then(book => {
                 const newState = {...state}
                 newState.book = book

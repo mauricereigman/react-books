@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import styles from './BooksSearch.module.scss';
 import {BooksService} from "../../services/Book.service";
 import {DataGrid, GridRowParams} from "@material-ui/data-grid";
@@ -9,8 +9,9 @@ import {CircularProgress, debounce, TextField} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {AsyncObjectStatus} from "../../util/AsyncObjectStatus";
 import Title from "../Title/Title.lazy";
+import {BookSearchProps} from "./BookSearchPropss";
 
-const BooksSearch = () => {
+const BooksSearch: FC<BookSearchProps> = (props) => {
 
     const history = useHistory()
     const initialState: BookSearchState = {
@@ -30,7 +31,6 @@ const BooksSearch = () => {
     }
 
     const [state, setState] = useState<BookSearchState>(initialState)
-    const bookService = new BooksService()
 
     const loadBooksBy = (searchQuery: string): void => {
         if (!searchQuery) return
@@ -38,7 +38,7 @@ const BooksSearch = () => {
         const newState = {...state}
         newState.books.status = AsyncObjectStatus.Loading
         setState(newState)
-        bookService.getBooks(searchQuery)
+        props.bookService.getBooks(searchQuery)
             .then(books => {
                 const newState = {...state}
                 newState.books.status = AsyncObjectStatus.Loaded
