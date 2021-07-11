@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {AppThunk, RootState} from '../../app/store'
+import {RootState} from '../../app/store'
 import {BooksService} from "../../services/Book.service"
 import {BookState, BookStatus} from "./State.interface"
 import {Book} from "../../models/Book"

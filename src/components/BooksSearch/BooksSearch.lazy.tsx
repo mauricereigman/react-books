@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, {lazy, Suspense} from 'react';
 
 const LazyBooksSearch = lazy(() => import('./BooksSearch'));
 

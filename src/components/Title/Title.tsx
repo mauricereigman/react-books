@@ -5,8 +5,6 @@ import {TitleProps} from "./TitleProps";
 const Title: FC<TitleProps> = (props) => {
 
     const showSubtitle = () => {
-        console.log(props.subTitle)
-
         if (props.subTitle) {
             return (<h2>props.subTitle</h2>)
         } else return null
