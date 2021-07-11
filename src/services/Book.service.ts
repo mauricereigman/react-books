@@ -12,7 +12,6 @@ export class BooksService {
     }
 
     public getBook(id: string): Promise<Book> {
-        console.log("getbook")
         return fetch(`${BooksService.googleBooksApi}/volumes/${id}`)
             .then(res => res.json())
             .then(json => json as GoogleBook)

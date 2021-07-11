@@ -3,6 +3,8 @@ import {useLocation} from "react-router-dom";
 import {BooksService} from "../../services/Book.service";
 import {BookDetailState} from "./BookDetailState";
 import {AsyncObjectStatus} from "../../util/AsyncObjectStatus";
+import {CircularProgress} from "@material-ui/core";
+import Title from "../Title/Title.lazy";
 
 const BookDetail = () => {
     const initialState: BookDetailState = {
@@ -16,28 +18,35 @@ const BookDetail = () => {
         const newState = {...state}
 
         newState.status = AsyncObjectStatus.Loading
+        setState(newState);
         bookService.getBook(id)
             .then(book => {
+                const newState = {...state}
                 newState.book = book
                 newState.status = AsyncObjectStatus.Loaded
+                console.log({newState})
                 setState(newState)
             })
     }
 
     const pathParams = useLocation().pathname.split("/")
     const bookIdFromPathParams = pathParams[2];
-
-    console.log(state);
     if (state.status === AsyncObjectStatus.Idle) loadBookBy(bookIdFromPathParams)
 
-    return (
-        <div data-testid="BookDetail">
-            <h2>
-                {state.book?.title}
-            </h2>
-            <img src={state.book?.thumbNail}/>
-        </div>
-    );
+    switch (state.status) {
+        case AsyncObjectStatus.Idle:
+            return (<div></div>)
+        case AsyncObjectStatus.Loading:
+            return (<CircularProgress/>)
+        case AsyncObjectStatus.Loaded:
+            return (<div data-testid="BookDetail">
+               <Title title={"Book details"}/>
+                <h3>{state.book?.title}</h3>
+                <img src={state.book?.thumbNail}/>
+            </div>)
+        case AsyncObjectStatus.Error:
+            return (<div>oeps something went wrong!</div>)
+    }
 }
 
 export default BookDetail;

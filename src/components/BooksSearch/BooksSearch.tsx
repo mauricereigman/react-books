@@ -8,11 +8,11 @@ import {BookRow} from "./BookRow";
 import {CircularProgress, debounce, TextField} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import {AsyncObjectStatus} from "../../util/AsyncObjectStatus";
+import Title from "../Title/Title.lazy";
 
 const BooksSearch = () => {
 
     const history = useHistory()
-
     const initialState: BookSearchState = {
         books: {
             status: AsyncObjectStatus.Idle,
@@ -40,7 +40,6 @@ const BooksSearch = () => {
         setState(newState)
         bookService.getBooks(searchQuery)
             .then(books => {
-                console.log("tableRowsFrom(books)", tableRowsFrom(books))
                 const newState = {...state}
                 newState.books.status = AsyncObjectStatus.Loaded
                 newState.books.books = books
@@ -78,6 +77,7 @@ const BooksSearch = () => {
 
     return (
         <div className={styles.BooksSearch} data-testid="BooksSearch">
+            <Title title={"Search"} subTitle={"Find some books"}/>
             <TextField
                 id="Search"
                 label="Search"
@@ -93,6 +93,7 @@ const BooksSearch = () => {
             />
         </div>
     );
+
 }
 
 export default BooksSearch;
