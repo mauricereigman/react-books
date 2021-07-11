@@ -24,7 +24,6 @@ const BookDetail = () => {
                 const newState = {...state}
                 newState.book = book
                 newState.status = AsyncObjectStatus.Loaded
-                console.log({newState})
                 setState(newState)
             })
     }
@@ -35,17 +34,17 @@ const BookDetail = () => {
 
     switch (state.status) {
         case AsyncObjectStatus.Idle:
-            return (<div></div>)
+            return null
         case AsyncObjectStatus.Loading:
             return (<CircularProgress/>)
         case AsyncObjectStatus.Loaded:
             return (<div data-testid="BookDetail">
                <Title title={"Book details"}/>
                 <h3>{state.book?.title}</h3>
-                <img src={state.book?.thumbNail}/>
+                <img src={state.book?.thumbNail} alt={"book cover image"}/>
             </div>)
         case AsyncObjectStatus.Error:
-            return (<div>oeps something went wrong!</div>)
+            return (<div>oops something went wrong!</div>)
     }
 }
 
