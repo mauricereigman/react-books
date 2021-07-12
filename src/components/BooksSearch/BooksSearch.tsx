@@ -1,6 +1,5 @@
 import React, {FC, useCallback, useState} from 'react';
 import styles from './BooksSearch.module.scss';
-import {BooksService} from "../../services/Book.service";
 import {DataGrid, GridRowParams} from "@material-ui/data-grid";
 import {BookSearchState} from "./BookSearchState";
 import {Book} from "../../models/Book";
