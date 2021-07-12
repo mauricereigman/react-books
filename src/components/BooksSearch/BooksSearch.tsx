@@ -12,10 +12,10 @@ import Title from "../Title/Title.lazy";
 
 const BooksSearch = () => {
 
-    const history = useHistory();
-    const dispatch = useAppDispatch();
+    const history = useHistory()
+    const dispatch = useAppDispatch()
 
-    const foundBooksState = useAppSelector(selectFoundBooks);
+    const foundBooksState = useAppSelector(selectFoundBooks)
     const table = {
         columns: [
             { field: 'id', headerName: 'id', width: 250 },
@@ -54,6 +54,7 @@ const BooksSearch = () => {
             <TextField
                 id="Search"
                 label="Search"
+                defaultValue={foundBooksState.searchQuery}
                 placeholder={"type a query and press enter"}
                 onChange={handleSearchInput}/>
             <span className={styles.spinner}>
@@ -65,7 +66,7 @@ const BooksSearch = () => {
                 onRowClick={handleRowClick}
             />
         </div>
-    );
+    )
 }
 
-export default BooksSearch;
+export default BooksSearch

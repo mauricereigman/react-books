@@ -18,12 +18,18 @@ const bookService = new BooksService()
 // // will call the thunk with the `dispatch` function as the first argument. Async
 // // code can then be executed and other actions can be dispatched. Thunks are
 // // typically used to make async requests.
+type FindBooksPayload = { searchQuery: string, books: Book[] } | undefined
+
 export const findBooksBy = createAsyncThunk(
     'books/findBooksBy',
-    async (searchQuery: string): Promise<Book[]> => {
-        if (!searchQuery) return []
+    async (searchQuery: string): Promise<FindBooksPayload> => {
+        if (!searchQuery) return
 
         return bookService.getBooks(searchQuery)
+            .then(books => ({
+                searchQuery,
+                books: books
+            }))
     }
 )
 
@@ -37,9 +43,11 @@ export const booksSlice = createSlice({
             .addCase(findBooksBy.pending, (state) => {
                 state.foundBooks.status = BookStatus.Loading
             })
-            .addCase(findBooksBy.fulfilled, (state, action: PayloadAction<Book[]>) => {
+            .addCase(findBooksBy.fulfilled, (state, action: PayloadAction<{ searchQuery: string, books: Book[] } | undefined>) => {
+                if (!action.payload) return
                 state.foundBooks.status = BookStatus.Idle
-                state.foundBooks.books = action.payload
+                state.foundBooks.searchQuery = action.payload.searchQuery
+                state.foundBooks.books = action.payload.books
             })
     },
 })

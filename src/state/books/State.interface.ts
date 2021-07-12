@@ -2,7 +2,8 @@ import {Book} from "../../models/Book";
 
 export interface BookState {
     foundBooks: {
-        status: BookStatus,
+        searchQuery?: string
+        status: BookStatus
         books: Book[]
     }
 }
