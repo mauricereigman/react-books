@@ -1,6 +1,6 @@
 import {Book} from "../../models/Book";
 
-export interface BookState {
+export interface BookManagerState {
     foundBooks: {
         searchQuery?: string
         status: BookStatus

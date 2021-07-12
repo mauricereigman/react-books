@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {RootState} from '../../app/store'
 import {BooksService} from "../../services/Book.service"
-import {BookState, BookStatus} from "./State.interface"
+import {BookManagerState, BookStatus} from "./State.interface"
 import {Book} from "../../models/Book"
 
-const initialState: BookState = {
+const initialState: BookManagerState = {
     foundBooks: {
         status: BookStatus.Idle,
         books: []

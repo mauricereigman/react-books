@@ -5,9 +5,9 @@ import {Book} from "../../models/Book";
 import {BookRow} from "./BookRow";
 import {CircularProgress, debounce, TextField} from "@material-ui/core";
 import {useHistory} from 'react-router-dom';
-import {findBooksBy, selectFoundBooks} from "../../state/books/Slice";
+import {findBooksBy, selectFoundBooks} from "../../state/book-manager/Slice";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {BookStatus} from "../../state/books/State.interface";
+import {BookStatus} from "../../state/book-manager/State.interface";
 import Title from "../Title/Title.lazy";
 
 const BooksSearch = () => {

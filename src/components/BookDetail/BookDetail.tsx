@@ -1,6 +1,6 @@
 import React from 'react';
 import {useAppSelector} from "../../app/hooks";
-import {selectFoundBooks} from "../../state/books/Slice";
+import {selectFoundBooks} from "../../state/book-manager/Slice";
 import {useLocation} from "react-router-dom";
 import Title from "../Title/Title.lazy";
 
