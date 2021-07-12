@@ -1,6 +1,5 @@
 import React, {FC, useState} from 'react';
 import {useLocation} from "react-router-dom";
-import {BooksService} from "../../services/Book.service";
 import {BookDetailState} from "./BookDetailState";
 import {AsyncObjectStatus} from "../../util/AsyncObjectStatus";
 import {CircularProgress} from "@material-ui/core";
@@ -38,11 +37,12 @@ const BookDetail: FC<BookDetailProps> = (props) => {
         case AsyncObjectStatus.Loading:
             return (<CircularProgress/>)
         case AsyncObjectStatus.Loaded:
-            return (<div data-testid="BookDetail">
-                <Title title={"Books 4 You!"}/>
-                <h3>{state.book?.title}</h3>
-                <img src={state.book?.thumbNail} alt={"book cover image"}/>
-            </div>)
+            return (
+                <div data-testid="BookDetail">
+                    <Title title={"Books 4 You!"}/>
+                    <h3>{state.book?.title}</h3>
+                    <img src={state.book?.thumbNail} alt={"book cover image"}/>
+                </div>)
         case AsyncObjectStatus.Error:
             return (<div>oops something went wrong!</div>)
     }

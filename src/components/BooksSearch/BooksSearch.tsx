@@ -77,7 +77,7 @@ const BooksSearch: FC<BookSearchProps> = (props) => {
 
     return (
         <div className={styles.BooksSearch} data-testid="BooksSearch">
-            <Title title={"Books 4 You!"} subTitle={"Find some books"}/>
+            <Title title={"Books 4 You!"} subTitle={"Find some books"} color={"orange"}/>
             <TextField
                 id="Search"
                 label="Search"
