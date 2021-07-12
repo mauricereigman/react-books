@@ -41,7 +41,7 @@ const BookDetail: FC<BookDetailProps> = (props) => {
                 <div data-testid="BookDetail">
                     <Title title={"Books 4 You!"}/>
                     <h3>{state.book?.title}</h3>
-                    <img src={state.book?.thumbNail} alt={"book cover image"}/>
+                    <img src={state.book?.thumbNail} alt={"book cover"}/>
                 </div>)
         case AsyncObjectStatus.Error:
             return (<div>oops something went wrong!</div>)
