@@ -50,7 +50,7 @@ const BooksSearch = () => {
 
     return (
         <div className={styles.BooksSearch} data-testid="BooksSearch">
-            <Title title={"Search"} subTitle={"Find some books"}/>
+            <Title title={"Search"} subTitle={"Find some books"} color={"orange"}/>
             <TextField
                 id="Search"
                 label="Search"
