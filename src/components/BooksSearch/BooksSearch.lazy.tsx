@@ -8,4 +8,4 @@ const BooksSearch = (props: JSX.IntrinsicAttributes & { children?: React.ReactNo
   </Suspense>
 );
 
-export default BooksSearch;
+export default BooksSearch

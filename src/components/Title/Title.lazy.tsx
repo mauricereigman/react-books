@@ -9,4 +9,4 @@ const Title = (props: TitleProps & { children?: React.ReactNode; }) => (
     </Suspense>
 );
 
-export default Title;
+export default Title

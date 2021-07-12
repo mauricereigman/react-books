@@ -8,4 +8,4 @@ const BookDetail = (props: JSX.IntrinsicAttributes & { children?: React.ReactNod
   </Suspense>
 );
 
-export default BookDetail;
+export default BookDetail

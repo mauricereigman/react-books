@@ -5,10 +5,10 @@ import Title from './Title';
 
 describe('<Title />', () => {
   test('it should mount', () => {
-    render(<Title title={"test"}/>);
+    render(<Title title={"test"}/>)
     
-    const title = screen.getByTestId('Title');
+    const title = screen.getByTestId('Title')
 
-    expect(title).toBeInTheDocument();
-  });
-});
+    expect(title).toBeInTheDocument()
+  })
+})
