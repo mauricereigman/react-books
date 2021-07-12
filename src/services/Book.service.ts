@@ -1,7 +1,6 @@
 import {Book} from "../models/Book";
 import {GoogleBook} from "./GoogleBook";
 import {validateOrReject} from "class-validator";
-import {Simulate} from "react-dom/test-utils";
 
 
 export class BooksService {
